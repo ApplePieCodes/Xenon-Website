@@ -1,0 +1,28 @@
+{
+  "docs": [
+    {
+      "type": "folder",
+      "name": "Introduction",
+      "path": "introduction",
+      "children": [
+        {
+          "type": "file",
+          "name": "Getting Started",
+          "path": "introduction/getting-started.html"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Advanced",
+      "path": "advanced",
+      "children": [
+        {
+          "type": "file",
+          "name": "Deep Dive",
+          "path": "advanced/deep-dive.html"
+        }
+      ]
+    }
+  ]
+}
