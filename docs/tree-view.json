@@ -1,51 +1,26 @@
 {
-  "type": "folder",
-  "name": "docs",
-  "path": "",
-  "children": [
+  "docs": [
     {
       "type": "folder",
-      "name": "Directory1",
-      "path": "directory1",
+      "name": "Introduction",
+      "path": "introduction",
       "children": [
         {
-          "type": "folder",
-          "name": "SubDirectory1",
-          "path": "directory1/subdirectory1",
-          "children": [
-            {
-              "type": "file",
-              "name": "topic1",
-              "path": "directory1/subdirectory1/topic1.html"
-            }
-          ]
-        },
-        {
           "type": "file",
-          "name": "topic2",
-          "path": "directory1/topic2.html"
+          "name": "Getting Started",
+          "path": "introduction/getting-started.html"
         }
       ]
     },
     {
-      "type": "file",
-      "name": "topic3",
-      "path": "topic3.html"
-    },
-    {
       "type": "folder",
-      "name": "Directory2",
-      "path": "directory2",
+      "name": "Advanced",
+      "path": "advanced",
       "children": [
         {
           "type": "file",
-          "name": "topic4",
-          "path": "directory2/topic4.html"
-        },
-        {
-          "type": "file",
-          "name": "topic5",
-          "path": "directory2/topic5.html"
+          "name": "Advanced Topics",
+          "path": "advanced/advanced-topics.html"
         }
       ]
     }
