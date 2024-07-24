@@ -1,5 +1,5 @@
 function createTreeView(data, parentElement) {
-    if (!Array.isArray(data)) {
+    if (!data || !Array.isArray(data)) {
         console.warn('Invalid data structure. Expected an array.');
         return; // Exit if data is not an array
     }
@@ -39,6 +39,10 @@ fetch('https://applepiecodes.github.io/Xenon-Website/docs/tree-view.json')
     .then(data => {
         console.log('Fetched data:', data); // Log data to inspect its structure
         const treeView = document.getElementById('tree-view');
-        createTreeView(data.docs, treeView); // Pass the array under the "docs" key
+        if (data.docs) {
+            createTreeView(data.docs, treeView); // Pass the array under the "docs" key
+        } else {
+            console.error('Data does not contain "docs" key');
+        }
     })
     .catch(error => console.error('Error loading directory structure:', error));
