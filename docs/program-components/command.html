@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="https://applepiecodes.github.io/Xenon-Website/"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xenon Documentation: Documentation Template</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="docs/styles.css"/>
+</head>
+<body>
+    <script>
+      function createTreeView(data, parentElement) {
+        if (!data || !Array.isArray(data)) {
+            console.warn('Invalid data structure. Expected an array.');
+            return; // Exit if data is not an array
+        }
+
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.className = item.type;
+            div.textContent = item.name;
+
+            if (item.type === 'folder') {
+                div.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+
+                const childrenDiv = document.createElement('div');
+                childrenDiv.className = 'children';
+                createTreeView(item.children, childrenDiv); // Handle children of the folder
+                div.appendChild(childrenDiv);
+            } else {
+                div.addEventListener('click', function() {
+                    window.location.href = item.path; // Navigate to file
+                });
+            }
+
+            parentElement.appendChild(div);
+        });
+    }
+
+    // Load directory structure and generate tree view
+    fetch('https://applepiecodes.github.io/Xenon-Website/docs/tree-view.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Fetched data:', data); // Log data to inspect its structure
+            const treeView = document.getElementById('tree-view');
+            if (data.docs) {
+                createTreeView(data.docs, treeView); // Pass the array under the "docs" key
+            } else {
+                console.error('Data does not contain "docs" key');
+            }
+        })
+        .catch(error => console.error('Error loading directory structure:', error));
+    </script>
+    <header role="banner">
+        <div>Xenon Documentation</div>
+        <nav role="navigation">
+            <a href="index.html#home">Home</a>
+            <a href="docs/index.html">Documentation</a>
+            <a href="downloads">Downloads</a>
+        </nav>
+    </header>
+    <div id="tree-view"></div>
+    <div id="content" style="margin-left: 270px; padding: 20px;">
+        <h1>Commands</h1>
+        <p>
+            <p>Here is an example of a Xenon Command</p>
+            <pre><code>IO.WriteLn(<span class="hljs-string">"Hello World"</span>)<span class="hljs-comment">;</span>
+            </code></pre><p>This command is broken down into the following tokens</p>
+            <pre><code><span class="hljs-symbol">Identifier:</span> IO.WriteLn
+            OpenParen
+            <span class="hljs-symbol">StringLiteral:</span> Hello World
+            CloseParen
+            Semicolon
+            </code></pre><p>During processing, the command name should be split into parts seperated by the &#39;.&#39; character.</p>
+            <pre><code><span class="hljs-symbol">Identifier:</span> {
+                IO,
+                WriteLn
+            }
+            </code></pre><p>Lets put this into an example. Here is our example file named <em>Hello.xe</em></p>
+            <pre><code>link Core.IO<span class="hljs-comment">;</span>
+
+            int main() {
+                IO.WriteLn(<span class="hljs-string">"Hello World!"</span>)<span class="hljs-comment">;</span>
+            }
+            </code></pre><p>Here we Link the IO Class under the Core namespace. by default, all commands from the class must be prepended with the Class name. You can change the name to be prepended by switching the link statement with the following</p>
+            <pre><code>link Core.IO <span class="hljs-keyword">as</span> InOut;
+
+            <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+                IO.WriteLn(<span class="hljs-string">"Hello World!"</span>);
+            }
+            </code></pre><p>Now to run the WriteLn command, you type...</p>
+            <pre><code>InOut.WriteLn(<span class="hljs-string">"Hello World"</span>)<span class="hljs-comment">;</span>
+            </code></pre><p>This allows you to link classes that have long names under much shorter ones, or to use 2 classes that have the same name.</p>
+            <p>You can pass multiple arguements to a command between the parantheses, each one is followed by a comma.</p>
+            <p>For example, Here is the definition for a function that runs FizzBuzz</p>
+            <pre><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fizzbuzz</span><span class="hljs-params">(<span class="hljs-keyword">int</span> j)</span> </span>{
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; j; i++) {
+                    <span class="hljs-keyword">if</span> ((i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) &amp;&amp; (i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>)) {
+                        IO.WriteLn(<span class="hljs-string">"FizzBuzz"</span>);
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) {
+                        IO.WriteLn(<span class="hljs-string">"Fizz"</span>);
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
+                        IO.WriteLn(<span class="hljs-string">"Buzz"</span>);
+                    }
+                    <span class="hljs-keyword">else</span> {
+                        IO.WriteLn(<span class="hljs-string">"Buzz"</span>);
+                    }
+                }
+            }
+            </code></pre><p>to run this function, you must pass an integer literal, expression, or variable that equates to, can be implicitly casted to or is explicitly casted to an integer. In the end, the value passed is an integer.</p>
+            <p>Here is an example of a function with multiple arguements</p>
+            <pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">exponent</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> e)</span> </span>{
+                <span class="hljs-keyword">int</span> rn;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; e; i++) {
+                    rn = rn * n;
+                }
+                <span class="hljs-keyword">return</span> rn;
+            }
+            </code></pre><p>this command returns n<sup>e</sup>. to run this command, you would type</p>
+            <pre><code>exponent(<span class="hljs-number">8</span>, <span class="hljs-number">2</span>);
+            </code></pre><p>this example would return 64.
+        </p>
+    </div>
+</body>
+</html>

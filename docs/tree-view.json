@@ -2,25 +2,13 @@
   "docs": [
     {
       "type": "folder",
-      "name": "Introduction",
-      "path": "introduction",
+      "name": "Parts of a program",
+      "path": "program-components",
       "children": [
         {
           "type": "file",
-          "name": "Getting Started",
-          "path": "introduction/getting-started.html"
-        }
-      ]
-    },
-    {
-      "type": "folder",
-      "name": "Advanced",
-      "path": "advanced",
-      "children": [
-        {
-          "type": "file",
-          "name": "Advanced Topics",
-          "path": "advanced/advanced-topics.html"
+          "name": "Commands",
+          "path": "program-components/command.html"
         }
       ]
     }

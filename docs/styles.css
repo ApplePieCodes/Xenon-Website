@@ -8,7 +8,7 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Distribute space between elements */
     align-items: center;
     padding: 20px;
     background-color: #333;
@@ -16,6 +16,14 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000; /* Ensure header stays above other content */
+}
+
+header div {
+    margin-right: auto; /* Push the navigation links to the right */
+}
+
+nav {
+    display: flex; /* Align navigation links horizontally */
 }
 
 nav a {
