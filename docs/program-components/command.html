@@ -73,64 +73,80 @@
     <div id="content" style="margin-left: 270px; padding: 20px;">
         <h1>Commands</h1>
         <p>
-            <p>Here is an example of a Xenon Command</p>
-            <pre><code>IO.WriteLn(<span class="hljs-string">"Hello World"</span>)<span class="hljs-comment">;</span>
-            </code></pre><p>This command is broken down into the following tokens</p>
-            <pre><code><span class="hljs-symbol">Identifier:</span> IO.WriteLn
-            OpenParen
-            <span class="hljs-symbol">StringLiteral:</span> Hello World
-            CloseParen
-            Semicolon
-            </code></pre><p>During processing, the command name should be split into parts seperated by the &#39;.&#39; character.</p>
-            <pre><code><span class="hljs-symbol">Identifier:</span> {
-                IO,
-                WriteLn
-            }
-            </code></pre><p>Lets put this into an example. Here is our example file named <em>Hello.xe</em></p>
-            <pre><code>link Core.IO<span class="hljs-comment">;</span>
+            Here is an example of a Xenon Command<br><br>
+            <code>IO.WriteLn("Hello World");</code><br><br>
+            This command is broken down into the following tokens<br><br>
+            <code>
+                Identifier: IO.WriteLn<br>
+                OpenParen<br>
+                StringLiteral: Hello World<br>
+                CloseParen<br>
+                Semicolon<br>
+            </code><br>
+            During processing, the command name should be split into parts seperated by the '.' character.<br><br>
+            <code>
+                Identifier: {<br>
+                    IO,<br>
+                    WriteLn<br>
+                }<br>
+            </code><br>
+            Lets put this into an example. Here is our example file named <em>Hello.xe</em><br><br>
+            <code>
+                link Core.IO;<br>
 
-            int main() {
-                IO.WriteLn(<span class="hljs-string">"Hello World!"</span>)<span class="hljs-comment">;</span>
-            }
-            </code></pre><p>Here we Link the IO Class under the Core namespace. by default, all commands from the class must be prepended with the Class name. You can change the name to be prepended by switching the link statement with the following</p>
-            <pre><code>link Core.IO <span class="hljs-keyword">as</span> InOut;
+                class Program {<br>
+                    int main() {<br>
+                        IO.WriteLn("Hello World!");<br>
+                    }<br>
+                }<br>
+            </code><br>
+            Here we Link the IO Class under the Core namespace. by default, all commands from the class must be prepended with the Class name. You can change the name to be prepended by switching the link statement with the following<br><br>
+            <code>
+                link Core.IO as InOut;<br>
 
-            <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
-                IO.WriteLn(<span class="hljs-string">"Hello World!"</span>);
-            }
-            </code></pre><p>Now to run the WriteLn command, you type...</p>
-            <pre><code>InOut.WriteLn(<span class="hljs-string">"Hello World"</span>)<span class="hljs-comment">;</span>
-            </code></pre><p>This allows you to link classes that have long names under much shorter ones, or to use 2 classes that have the same name.</p>
-            <p>You can pass multiple arguements to a command between the parantheses, each one is followed by a comma.</p>
-            <p>For example, Here is the definition for a function that runs FizzBuzz</p>
-            <pre><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fizzbuzz</span><span class="hljs-params">(<span class="hljs-keyword">int</span> j)</span> </span>{
-                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; j; i++) {
-                    <span class="hljs-keyword">if</span> ((i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) &amp;&amp; (i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>)) {
-                        IO.WriteLn(<span class="hljs-string">"FizzBuzz"</span>);
-                    }
-                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) {
-                        IO.WriteLn(<span class="hljs-string">"Fizz"</span>);
-                    }
-                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
-                        IO.WriteLn(<span class="hljs-string">"Buzz"</span>);
-                    }
-                    <span class="hljs-keyword">else</span> {
-                        IO.WriteLn(<span class="hljs-string">"Buzz"</span>);
-                    }
-                }
-            }
-            </code></pre><p>to run this function, you must pass an integer literal, expression, or variable that equates to, can be implicitly casted to or is explicitly casted to an integer. In the end, the value passed is an integer.</p>
-            <p>Here is an example of a function with multiple arguements</p>
-            <pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">exponent</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> e)</span> </span>{
-                <span class="hljs-keyword">int</span> rn;
-                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; e; i++) {
-                    rn = rn * n;
-                }
-                <span class="hljs-keyword">return</span> rn;
-            }
-            </code></pre><p>this command returns n<sup>e</sup>. to run this command, you would type</p>
-            <pre><code>exponent(<span class="hljs-number">8</span>, <span class="hljs-number">2</span>);
-            </code></pre><p>this example would return 64.
+                class Program {<br>
+                    int main() {<br>
+                        IO.WriteLn("Hello World!");<br>
+                    }<br>
+                }<br>
+            </code><br>
+            Now to run the WriteLn command, you type...<br><br>
+            <code>InOut.WriteLn("Hello World");</code><br><br>
+            This allows you to link classes that have long names under much shorter ones, or to use 2 classes that have the same name.<br><br>
+            You can pass multiple arguements to a command between the parantheses, each one is followed by a comma.<br><br>
+            For example, Here is the definition for a function that runs FizzBuzz<br><br>
+            <code>
+                void fizzbuzz(int j) {<br>
+                    for (int i = 0; i < j; i++) {<br>
+                        if ((i % 3 == 0) && (i % 5 == 0)) {<br>
+                            IO.WriteLn("FizzBuzz");<br>
+                        }<br>
+                        else if (i % 3 == 0) {<br>
+                            IO.WriteLn("Fizz");<br>
+                        }<br>
+                        else if (i % 5 == 0) {<br>
+                            IO.WriteLn("Buzz");<br>
+                        }<br>
+                        else {<br>
+                            IO.WriteLn("Buzz");<br>
+                        }<br>
+                    }<br>
+                }<br>
+            </code><br>
+            to run this function, you must pass an integer literal, expression, or variable that equates to, can be implicitly casted to or is explicitly casted to an integer. In the end, the value passed is an integer.<br><br>
+            Here is an example of a function with multiple arguements<br><br>
+            <code>
+                int exponent(int n, int e) {<br>
+                    int rn;<br>
+                    for (int i = 0; i < e; i++) {<br>
+                        rn = rn * n;<br>
+                    }<br>
+                    return rn;<br>
+                }<br>
+            </code><br>
+            this command returns n<sup>e</sup>. to run this command, you would type<br><br>
+            <code>exponent(8, 2);</code><br><br>
+            this example would return 64.
         </p>
     </div>
 </body>

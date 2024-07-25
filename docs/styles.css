@@ -37,9 +37,9 @@ nav a:hover {
 }
 
 h1 {
-    text-align: center;
     color: #e0e0e0;
     margin-top: 80px; /* Added margin to prevent overlap with header */
+    margin-left: 20px; /* Aligns the h1 to the left */
 }
 
 p {
