@@ -8,7 +8,7 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Distribute space between elements */
     align-items: center;
     padding: 20px;
     background-color: #333;
@@ -16,6 +16,14 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000; /* Ensure header stays above other content */
+}
+
+header div {
+    margin-right: auto; /* Push the navigation links to the right */
+}
+
+nav {
+    display: flex; /* Align navigation links horizontally */
 }
 
 nav a {
@@ -29,13 +37,13 @@ nav a:hover {
 }
 
 h1 {
-    text-align: center;
     color: #e0e0e0;
     margin-top: 80px; /* Added margin to prevent overlap with header */
+    margin-left: 20px; /* Aligns the h1 to the left */
 }
 
 p, code {
-    text-align: center;
+    text-align: justify;
     max-width: 600px;
     margin: 0 auto;
     color: #dcdcdc;
@@ -43,6 +51,7 @@ p, code {
 
 code{
     font-weight: 300;
+    font-size: 1.5em;
 }
 
 #tree-view {
