@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="https://applepiecodes.github.io/Xenon-Website/docs/"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xenon Documentation: Documentation Template</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <script>
+      function createTreeView(data, parentElement) {
+        if (!data || !Array.isArray(data)) {
+            console.warn('Invalid data structure. Expected an array.');
+            return; // Exit if data is not an array
+        }
+
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.className = item.type;
+            div.textContent = item.name;
+
+            if (item.type === 'folder') {
+                div.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+
+                const childrenDiv = document.createElement('div');
+                childrenDiv.className = 'children';
+                createTreeView(item.children, childrenDiv); // Handle children of the folder
+                div.appendChild(childrenDiv);
+            } else {
+                div.addEventListener('click', function() {
+                    window.location.href = item.path; // Navigate to file
+                });
+            }
+
+            parentElement.appendChild(div);
+        });
+    }
+
+    // Load directory structure and generate tree view
+    fetch('https://applepiecodes.github.io/Xenon-Website/docs/tree-view.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Fetched data:', data); // Log data to inspect its structure
+            const treeView = document.getElementById('tree-view');
+            if (data.docs) {
+                createTreeView(data.docs, treeView); // Pass the array under the "docs" key
+            } else {
+                console.error('Data does not contain "docs" key');
+            }
+        })
+        .catch(error => console.error('Error loading directory structure:', error));
+    </script>
+    <header role="banner">
+        <div>Xenon Documentation</div>
+        <nav role="navigation">
+            <a href="https://applepiecodes.github.io/Xenon-Website/index.html#home">Home</a>
+            <a href="index.html">Documentation</a>
+            <a href="https://applepiecodes.github.io/Xenon-Website/downloads">Downloads</a>
+        </nav>
+    </header>
+    <div id="tree-view"></div>
+    <div id="content" style="margin-left: 270px; padding: 20px;">
+        <h1>Variable Definition</h1>
+        <p>
+            Here is an example of a Xenon Variable Definition<br><br>
+            <code>int32 i = 0;</code><br><br>
+            This Variable Definition is broken down into the following tokens.<br><br>
+            <code>
+                Keyword: int32<br>
+                Identifier: i<br>
+                Equals<br>
+                IntegerLiteral: 0<br>
+                Semicolon<br>
+            </code><br>
+            In this scenario, you passed a datatype of <em>int32</em>. The compiler will reserve the required space for the data type. You can also pass a datatype that can be implicitly converted.<br><br>
+        </p>
+    </div>
+</body>
+</html>

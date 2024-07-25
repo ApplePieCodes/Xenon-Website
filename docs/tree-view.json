@@ -7,8 +7,18 @@
       "children": [
         {
           "type": "file",
-          "name": "Commands",
+          "name": "Command",
           "path": "program-components/command.html"
+        },
+        {
+          "type": "file",
+          "name": "Variable Definition",
+          "path": "program-components/variabledefinition.html"
+        },
+        {
+          "type": "file",
+          "name": "Variable Redefinition",
+          "path": "program-components/variableredefinition.html"
         }
       ]
     }
